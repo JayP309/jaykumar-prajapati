@@ -1,0 +1,186 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+
+const links = [
+  { label: 'About', href: '#about' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Projects', href: 'projects', isPage: true },
+  { label: 'Certifications', href: 'certifications', isPage: true },
+  { label: 'Contact', href: '#contact' },
+];
+
+export default function Navbar({ onNavigate, theme, toggleTheme }) {
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState('');
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 30);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <motion.header
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed inset-x-0 top-0 z-50"
+    >
+      {/* Pill nav */}
+      <div className="container-tight pt-4">
+        <div
+          style={{
+            borderRadius: '18px',
+            background: scrolled ? 'rgba(7,17,31,0.88)' : 'rgba(7,17,31,0.50)',
+            backdropFilter: 'blur(32px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(32px) saturate(180%)',
+            border: scrolled ? '1px solid rgba(0,121,193,0.30)' : '1px solid rgba(255,255,255,0.08)',
+            boxShadow: scrolled
+              ? '0 4px 28px rgba(0,0,0,0.40), 0 1px 3px rgba(0,0,0,0.25)'
+              : '0 2px 12px rgba(0,0,0,0.20)',
+            transition: 'all 0.45s cubic-bezier(0.16,1,0.3,1)',
+          }}
+          className="relative flex items-center justify-between px-5 py-3"
+        >
+          {/* Specular highlight line */}
+          <div className="absolute inset-x-0 top-0 h-px rounded-t-2xl" style={{
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent)'
+          }} />
+
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-2.5 z-10">
+            <div className="relative w-8 h-8 rounded-xl flex items-center justify-center overflow-hidden"
+              style={{ background: 'linear-gradient(135deg, #0079C1, #00A9E0)' }}>
+              <span className="font-bold text-white text-sm">J</span>
+              <div className="absolute inset-0 flex items-start justify-center">
+                <div className="w-full h-1/2 rounded-t-xl" style={{ background: 'rgba(255,255,255,0.15)' }} />
+              </div>
+            </div>
+            <span className="font-semibold text-sm" style={{ color: 'var(--text)' }}>Jay Prajapati</span>
+          </a>
+
+          {/* Desktop links */}
+          <nav className="hidden md:flex items-center gap-1">
+            {links.map((l) => (
+              l.isPage
+                ? (
+                  <motion.button
+                    key={l.label}
+                    onClick={() => { onNavigate?.(l.href); setActive(l.href); }}
+                    whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                    className="relative px-4 py-1.5 text-sm font-medium rounded-xl transition-colors"
+                    style={{ color: active === l.href ? 'var(--accent)' : 'var(--text-3)', background: 'none', border: 'none', cursor: 'pointer' }}
+                  >
+                    {active === l.href && (
+                      <motion.div layoutId="nav-pill" className="absolute inset-0 rounded-xl"
+                        style={{ background: 'var(--accent-light)' }} />
+                    )}
+                    <span className="relative">{l.label}</span>
+                  </motion.button>
+                )
+                : (
+                  <motion.a
+                    key={l.label} href={l.href}
+                    whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                    onClick={() => setActive(l.href)}
+                    className="relative px-4 py-1.5 text-sm font-medium rounded-xl transition-colors"
+                    style={{ color: active === l.href ? 'var(--accent)' : 'var(--text-3)' }}
+                  >
+                    {active === l.href && (
+                      <motion.div layoutId="nav-pill" className="absolute inset-0 rounded-xl"
+                        style={{ background: 'var(--accent-light)' }} />
+                    )}
+                    <span className="relative">{l.label}</span>
+                  </motion.a>
+                )
+            ))}
+          </nav>
+
+
+
+          {/* Right Controls Container */}
+          <div className="flex items-center gap-2 z-10">
+            {/* Theme Toggle Button */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleTheme}
+              className="w-8 h-8 rounded-xl flex items-center justify-center transition-colors"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid var(--glass-border)',
+                color: 'var(--text)',
+                cursor: 'pointer'
+              }}
+              title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+            >
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+            </motion.button>
+
+            {/* Mobile menu btn */}
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setOpen(!open)}
+              className="md:hidden w-8 h-8 rounded-xl flex items-center justify-center"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid var(--glass-border)',
+                color: 'var(--text)',
+                cursor: 'pointer'
+              }}
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {open
+                  ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X size={15} /></motion.span>
+                  : <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><Menu size={15} /></motion.span>
+                }
+              </AnimatePresence>
+            </motion.button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -8 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            className="md:hidden mx-4 mt-2 glass-strong rounded-2xl p-4 overflow-hidden"
+          >
+            {links.map((l, i) => {
+              const handleClick = (e) => {
+                setOpen(false);
+                if (l.isPage) {
+                  e.preventDefault();
+                  onNavigate?.(l.href);
+                }
+              };
+              return (
+                <motion.a
+                  key={l.label}
+                  href={l.isPage ? '#' : l.href}
+                  onClick={handleClick}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06 }}
+                  className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium transition-colors hover:bg-black/5"
+                  style={{ color: 'var(--text-2)' }}
+                >
+                  {l.label}
+                  <span style={{ color: 'var(--text-4)' }}>→</span>
+                </motion.a>
+              );
+            })}
+
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
+}
