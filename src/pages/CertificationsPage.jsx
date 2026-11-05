@@ -4,6 +4,15 @@ import { ArrowLeft, Award, ExternalLink, ShieldCheck, Calendar } from 'lucide-re
 
 const CERTIFICATIONS = [
   {
+    title: "Certificate in Advance Bluebeam",
+    issuer: "PTS CAD EXPERT (MSME India Certified)",
+    desc: "Completed advanced training on Bluebeam Revu, covering architectural markup tools, quantity takeoffs, estimation, document comparison, and PDF-based engineering coordination workflows. (Student ID: AC20788338)",
+    credentialUrl: import.meta.env.BASE_URL + 'assets/PRAJAPATI_JAYKUMAR_ARVINDBHAI_BLUEBEAM.pdf',
+    date: "Jul 2026",
+    color: "#0079C1",
+    bg: "var(--accent-light)"
+  },
+  {
     title: "Process Improvement Foundations",
     issuer: "LinkedIn Learning",
     desc: "Completed professional training covering business process improvement, analyzing operational workflows, identifying process bottlenecks, and applying quality optimization frameworks.",

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, Eye } from 'lucide-react';
+
+const BASE = import.meta.env.BASE_URL;
 
 const links = [
   { label: 'About', href: '#about' },
@@ -103,6 +105,25 @@ export default function Navbar({ onNavigate, theme, toggleTheme }) {
 
           {/* Right Controls Container */}
           <div className="flex items-center gap-2 z-10">
+            {/* View CV Button */}
+            <motion.a
+              href={`${BASE}Jay_Prajapati_Master_Resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all"
+              style={{
+                background: 'rgba(0,121,193,0.14)',
+                border: '1px solid rgba(0,121,193,0.32)',
+                color: 'var(--accent)',
+              }}
+              title="View CV in a new tab"
+            >
+              <Eye size={13} />
+              <span>View CV</span>
+            </motion.a>
+
             {/* Theme Toggle Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -135,7 +156,7 @@ export default function Navbar({ onNavigate, theme, toggleTheme }) {
               <AnimatePresence mode="wait" initial={false}>
                 {open
                   ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><X size={15} /></motion.span>
-                  : <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}><Menu size={15} /></motion.span>
+                  : <motion.span key="m" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}><Menu size={15} /></motion.span>
                 }
               </AnimatePresence>
             </motion.button>
@@ -178,6 +199,27 @@ export default function Navbar({ onNavigate, theme, toggleTheme }) {
               );
             })}
 
+            {/* Mobile View CV Button */}
+            <motion.a
+              href={`${BASE}Jay_Prajapati_Master_Resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: links.length * 0.06 }}
+              className="flex items-center justify-between px-3 py-3 mt-2 rounded-xl text-sm font-semibold transition-colors"
+              style={{
+                background: 'rgba(0,121,193,0.12)',
+                border: '1px solid rgba(0,121,193,0.28)',
+                color: 'var(--accent)',
+              }}
+            >
+              <span className="flex items-center gap-2">
+                <Eye size={15} /> View CV
+              </span>
+              <span style={{ color: 'var(--accent)', fontSize: '0.875rem' }}>↗</span>
+            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>

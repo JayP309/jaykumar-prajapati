@@ -12,12 +12,14 @@ const experiences = [
     org: 'Zachry Integrity Engineering Ltd.',
     period: 'May 2025 – Present',
     location: 'Calgary, AB',
+    color: '#0079C1',
+    intro: 'Zachry Integrity Engineering provides specialized mechanical integrity and engineering assessment services for refinery and petrochemical assets across North America. In my role, I support engineering evaluations of pressure equipment and piping systems, helping clients make technically sound decisions related to equipment integrity, repair planning, and continued operation.',
     points: [
-      'Performed FEA-based mechanical analysis and integrity assessments for pressure equipment and piping systems using ANSYS Workbench and APDL, evaluating structural behaviour, damage mechanisms, and failure risk under operating and transient loading conditions.',
-      'Conducted API 579-1/ASME Level 3 Fitness-for-Service evaluations on refinery pressure vessels including a Vacuum Tower and Coker Main Fractionator, analysing post-WOL distortion, operating loads, and equipment geometry to support repair and continued operation decisions.',
-      'Developed engineering design specifications and ASME B31.3-compliant calculations for piping components and pressure equipment, applying ASME BPVC VIII, B16.5, B31J, PCC-1, and ABSA AB-520 codes to produce calculation packages accepted by client engineering teams.',
-      'Performed root-cause analysis and failure mode investigations for pressure equipment and cyclically loaded piping, integrating thermography inspection data and operating history to diagnose damage mechanisms and develop corrective action recommendations.',
-      'Coordinated technical deliverables across multi-discipline internal teams and client field personnel, managing concurrent project schedules and ensuring engineering outputs accurately reflected field conditions and operational constraints.',
+      'Supported API 579-1 Level 3 Fitness-for-Service (FFS) assessments for refinery assets, including vacuum towers, coke drums, fractionators, nozzles, cyclic piping systems, and non-standard piping configurations.',
+      'Performed static, dynamic, and fatigue finite element analyses using ANSYS Workbench and APDL to evaluate structural response, localized stresses, deformation, and fatigue-sensitive regions.',
+      'Developed finite element models to evaluate non-standard jacketed pipe cross configurations and support Stress Intensification Factor (SIF) assessments using ASME B31.3 and ASME B31J principles where standard values were unavailable.',
+      'Reviewed client drawings, equipment records, inspection findings, and thermography data to prepare engineering calculations, technical reports, and mechanical integrity assessments.',
+      'Collaborated with multidisciplinary engineering teams and client personnel to deliver technically sound recommendations supporting equipment reliability, repair planning, and continued operation.'
     ],
   },
   {
@@ -25,11 +27,14 @@ const experiences = [
     org: 'Prime Toolings',
     period: 'Sep 2024 – Jan 2025',
     location: 'Remote',
+    color: '#ea580c',
+    intro: 'Prime Toolings specializes in the design and manufacturing of precision tooling and engineering solutions for aerospace and industrial applications. During my internship, I supported propulsion-system design activities involving CAD modelling, engineering analysis, and simulation-driven design improvements.',
     points: [
-      'Designed propulsion system components and optimized layouts achieving a 20% improvement in aerodynamic efficiency and 15% improvement in structural integrity using CAD and simulation tools.',
-      'Conducted 30+ detailed simulations to analyze engine component aerodynamics, improving airflow performance by 15% and identifying key design improvements.',
-      'Led turbine blade design using advanced propulsion alloys, reducing component weight by 10% and increasing durability by 25%.',
-      'Coordinated with a team of 5 engineers to deliver complex projects within strict timelines and in compliance with industry standards.',
+      'Designed and refined propulsion-system components and layouts using CAD tools, considering aerodynamic performance, structural requirements, and manufacturability.',
+      'Conducted CFD simulations to evaluate airflow behaviour and compare design iterations, supporting engineering decisions throughout the development process.',
+      'Supported turbine blade and propulsion component development by evaluating geometry, material selection, and structural performance.',
+      'Prepared engineering models, technical documentation, and simulation results to support design reviews and project discussions.',
+      'Collaborated with engineers throughout the design process to deliver assigned project work within established timelines.'
     ],
   },
   {
@@ -37,8 +42,14 @@ const experiences = [
     org: 'Circle K',
     period: 'Feb 2023 – Present',
     location: 'Calgary, AB',
+    color: '#dc2626',
+    intro: 'Circle K is one of North America\'s largest convenience retail chains, serving millions of customers through a network of company-owned and franchised stores. As an Assistant Manager, I supported daily store operations while leading a team in a fast-paced customer-focused environment.',
     points: [
-      'Managed daily operations and a team of 8 staff, achieving a 14% sales increase, 20% reduction in safety incidents, and 15% decrease in stockouts through structured procedures, staff training, and an Excel VBA inventory management system.',
+      'Supervised day-to-day store operations, ensuring high standards of customer service, inventory management, cash handling, and operational efficiency.',
+      'Led, trained, and supported a team of employees by coordinating work schedules, delegating responsibilities, and maintaining a collaborative work environment.',
+      'Developed an Excel VBA-based inventory tracking system that improved inventory visibility and contributed to a reduction in stock shortages.',
+      'Helped improve operational performance by supporting initiatives that contributed to increased sales, enhanced workplace safety, and more efficient inventory management.',
+      'Strengthened leadership, communication, problem-solving, and decision-making skills while balancing operational priorities in a high-volume retail environment.'
     ],
   },
   {
@@ -46,11 +57,14 @@ const experiences = [
     org: 'Brahmastra Aerospace',
     period: 'Nov 2022 – Jan 2023',
     location: 'Bengaluru, India (Remote)',
+    color: '#4f46e5',
+    intro: 'Brahmastra Aerospace provided project-based exposure to aerospace vehicle design, CAD modelling, and computational fluid dynamics. During this training experience, I worked on aircraft and propulsion-related design concepts using CATIA V5 and CFD tools.',
     points: [
-      'Designed an aircraft wing with internal support structures using CATIA V5, optimizing overall structural performance.',
-      'Performed CFD analysis at varying angles of attack (2-6 degrees) to optimize aerodynamic efficiency.',
-      'Developed a simplified rocket model and conducted in-depth CFD simulations, improving stability and thrust performance.',
-      'Engineered a jet engine turbine blade using advanced CAD techniques to enhance aerodynamic reliability.',
+      'Designed an aircraft wing with internal support structures using CATIA V5, considering aerodynamic geometry and structural arrangement.',
+      'Performed CFD analyses at multiple angles of attack to study airflow behaviour and evaluate aerodynamic performance.',
+      'Developed a simplified rocket model and conducted simulations to examine stability, airflow, and thrust-related characteristics.',
+      'Modelled a jet-engine turbine blade using CAD techniques, considering aerodynamic form and component geometry.',
+      'Documented design assumptions, simulation observations, and project findings as part of the technical training activities.'
     ],
   },
 ];
@@ -102,19 +116,42 @@ export default function Experience() {
                       className="card p-5 sm:p-6"
                       style={{ transition: 'none' }}
                     >
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <div className="min-w-0">
-                          <h3 className="font-semibold text-sm sm:text-base" style={{ color: 'var(--text)' }}>{exp.role}</h3>
-                          <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--accent)' }}>{exp.org}</p>
+                      <div className="flex items-start gap-3.5 mb-3.5">
+                        {/* Org Initial Badge */}
+                        <div 
+                          className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-bold text-white text-base shadow-sm"
+                          style={{ 
+                            background: `linear-gradient(135deg, ${exp.color}dd, ${exp.color})`,
+                            border: '1px solid rgba(255,255,255,0.15)'
+                          }}
+                        >
+                          {exp.org.charAt(0)}
                         </div>
-                        <span className="text-[10px] sm:text-xs px-2.5 py-1 rounded-full glass font-medium shrink-0" style={{ color: 'var(--text-3)' }}>
-                          {exp.period}
-                        </span>
+
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+                            <div>
+                              <h3 className="font-semibold text-sm sm:text-base leading-snug" style={{ color: 'var(--text)' }}>{exp.role}</h3>
+                              <p className="text-xs sm:text-sm font-medium mt-0.5" style={{ color: 'var(--accent)' }}>{exp.org}</p>
+                            </div>
+                            <span className="text-[10px] sm:text-xs px-2.5 py-1 rounded-full glass font-medium shrink-0 self-start sm:self-auto mt-1 sm:mt-0" style={{ color: 'var(--text-3)' }}>
+                              {exp.period}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-1 mb-3">
+
+                      <div className="flex items-center gap-1 mb-3.5">
                         <MapPin size={11} style={{ color: 'var(--text-4)' }} />
                         <span className="text-[10px] sm:text-xs" style={{ color: 'var(--text-4)' }}>{exp.location}</span>
                       </div>
+                      
+                      {exp.intro && (
+                        <p className="text-xs sm:text-sm leading-6 mb-4" style={{ fontFamily: "'DM Sans', sans-serif", fontStyle: 'italic', color: 'var(--text-2)', opacity: 0.9 }}>
+                          {exp.intro}
+                        </p>
+                      )}
+
                       <ul className="space-y-2">
                         {exp.points.map((pt, pi) => (
                           <li key={pi} className="flex gap-2 text-xs sm:text-sm leading-6" style={{ color: 'var(--text-2)' }}>

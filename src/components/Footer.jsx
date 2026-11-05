@@ -1,12 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+const BASE = import.meta.env.BASE_URL;
+
 const links = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
+  { label: 'View CV ↗', href: `${BASE}Jay_Prajapati_Master_Resume.pdf`, isExternal: true },
 ];
 
 export default function Footer() {
@@ -18,6 +21,8 @@ export default function Footer() {
             <motion.a
               key={l.label}
               href={l.href}
+              target={l.isExternal ? "_blank" : undefined}
+              rel={l.isExternal ? "noopener noreferrer" : undefined}
               whileHover={{ color: 'var(--accent)' }}
               className="text-sm transition-colors"
               style={{ color: 'var(--text-4)' }}

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
-import { Github, Linkedin, Download, Mail, MapPin, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, Download, Mail, MapPin, ArrowDown, Eye } from 'lucide-react';
 const BASE = import.meta.env.BASE_URL;
 const jayImg = `${BASE}assets/jay.jpg`;
 
@@ -131,11 +131,21 @@ export default function Hero({ onNavigate }) {
             className="flex flex-wrap gap-3"
           >
             <motion.a
-              href={`${BASE}BASE_RESUME_2026.pdf`}
-              download="Jay_Prajapati_MechanicalEngineer.pdf"
+              href={`${BASE}Jay_Prajapati_Master_Resume.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
               className="btn-primary text-xs sm:text-sm"
+            >
+              <Eye size={14} /> View CV
+            </motion.a>
+            <motion.a
+              href={`${BASE}Jay_Prajapati_Master_Resume.pdf`}
+              download="Jay_Prajapati_MechanicalEngineer.pdf"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.96 }}
+              className="btn-ghost text-xs sm:text-sm"
             >
               <Download size={14} /> Download CV
             </motion.a>

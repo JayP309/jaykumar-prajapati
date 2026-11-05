@@ -226,6 +226,10 @@ function ProjectCarouselCard({ p, index, onNavigate, hoverRef, rotationY }) {
                    loop
                    playsInline
                    className="w-full h-full object-contain"
+                   style={{
+                     imageRendering: '-webkit-optimize-contrast',
+                     filter: 'contrast(1.08) brightness(1.02)'
+                   }}
                  />
                ) : (
                  <img

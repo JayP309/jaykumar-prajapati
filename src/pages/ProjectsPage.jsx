@@ -629,6 +629,28 @@ const projects = [
       import.meta.env.BASE_URL + 'assets/media__1783618616882.png',
       import.meta.env.BASE_URL + 'assets/media__1783618616887.png'
     ]
+  },
+  {
+    number: "17",
+    title: "Alberta Pipeline Integrity & Proximity Map",
+    subtitle: "Geospatial Analysis · QGIS Asset Integrity Mapping",
+    category: "Personal Projects",
+    color: "#0d9488",
+    accent: "#0f766e",
+    description: "Developed a pipeline integrity and proximity GIS mapping model using QGIS to analyze pipeline networks across Alberta. Integrated spatial datasets, including water bodies, transportation infrastructure, and pipeline coordinates, to identify high-consequence areas (HCAs) and evaluate geotechnical proximity risks.",
+    outcome: "Generated a detailed proximity and integrity analysis map highlighting crossing zones, watercourse buffer zones, and critical infrastructure offsets. Established automated buffer rules to identify pipeline segments requiring prioritized direct integrity assessments.",
+    challenge: "Handling large government geodatabases and aligning differing coordinate projection systems (NAD83 vs UTM Zone 12N) to ensure sub-meter spatial alignment.",
+    impact: "Created a clear spatial reference map that helps pipeline operators identify environmental risks and prioritize integrity inspection programs.",
+    tools: ["QGIS", "Geospatial Analysis", "Spatial Buffering", "Asset Integrity", "Pipeline Mapping"],
+    Illustration: SIFsIllustration,
+    stats: [
+      { val: "QGIS", label: "GIS Solver" },
+      { val: "NAD83", label: "Coordinate Datum" },
+      { val: "Proximity", label: "Analysis Model" }
+    ],
+    images: [
+      import.meta.env.BASE_URL + 'assets/alberta_pipeline_proximity_map.png'
+    ]
   }
 ];
 
@@ -701,6 +723,10 @@ const ProjectCard = ({ project, index, initialProjectNum }) => {
                 loop
                 playsInline
                 className="w-full h-full object-contain"
+                style={{
+                  imageRendering: '-webkit-optimize-contrast',
+                  filter: 'contrast(1.08) brightness(1.02)'
+                }}
               />
             ) : images && images.length > 0 ? (
               <img
