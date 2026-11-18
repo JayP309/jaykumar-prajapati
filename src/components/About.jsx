@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Globe, Briefcase, BookOpen, Users, Award } from 'lucide-react';
+import { Globe, Briefcase, BookOpen, Users, Award, Wind } from 'lucide-react';
+import { isHidiActive } from '../utils/careerConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,22 +24,64 @@ const stats = [
   { label: 'EIT – APEGA', value: '✓' },
 ];
 
-const cards = [
-  { icon: Globe,    color: '#0079C1', bg: 'var(--accent-light)',   title: 'FEA & Mechanical Integrity',  body: (
-    <><span style={{opacity:0.75, fontSize:'0.8rem'}}>Specialized in finite element analysis and mechanical integrity assessment for industrial pressure equipment:</span>
-    <ul style={{marginTop:'8px', paddingLeft:'1.1em', lineHeight:'1.9', fontSize:'0.8rem', listStyleType:'disc'}}>
-      <li>ANSYS Workbench & APDL</li>
-      <li>API 579-1 / ASME Level 3 FFS</li>
-      <li>ASME BPVC VIII, B31.3, B16.5, B31J</li>
-      <li>Piping Stress & Vibration Analysis</li>
-      <li>Root-Cause & Failure Analysis</li>
-    </ul></>
-  )},
-  { icon: Briefcase, color: '#0079C1', bg: 'var(--accent-light)', title: 'Professional Experience', body: (
-    <div style={{fontSize:'0.8rem', lineHeight:'1.75'}}>
-      Engineering Specialist at Zachry Integrity Engineering Ltd. — delivering FEA analysis, FFS evaluations, and ASME-compliant piping calculations for major oil & gas refinery clients across Western Canada.
-    </div>
-  )},
+const getCards = () => {
+  const isHidi = isHidiActive();
+
+  return [
+    isHidi
+      ? {
+          icon: Wind,
+          color: '#0079C1',
+          bg: 'var(--accent-light)',
+          title: 'Building Mechanical & HVAC',
+          body: (
+            <>
+              <span style={{ opacity: 0.75, fontSize: '0.8rem' }}>
+                Specialized in building mechanical systems, HVAC load modeling, and BIM coordination:
+              </span>
+              <ul style={{ marginTop: '8px', paddingLeft: '1.1em', lineHeight: '1.9', fontSize: '0.8rem', listStyleType: 'disc' }}>
+                <li>Revit MEP & BIM Coordination</li>
+                <li>Heating & Cooling Load Calcs (ASHRAE 90.1)</li>
+                <li>VAV & Hydronic Distribution Systems</li>
+                <li>National Building & Energy Codes (NBC/NECB)</li>
+                <li>Equipment Sizing (AHUs, Chillers, Boilers)</li>
+              </ul>
+            </>
+          ),
+        }
+      : {
+          icon: Globe,
+          color: '#0079C1',
+          bg: 'var(--accent-light)',
+          title: 'FEA & Mechanical Integrity',
+          body: (
+            <>
+              <span style={{ opacity: 0.75, fontSize: '0.8rem' }}>
+                Specialized in finite element analysis and mechanical integrity assessment for industrial pressure equipment:
+              </span>
+              <ul style={{ marginTop: '8px', paddingLeft: '1.1em', lineHeight: '1.9', fontSize: '0.8rem', listStyleType: 'disc' }}>
+                <li>ANSYS Workbench & APDL</li>
+                <li>API 579-1 / ASME Level 3 FFS</li>
+                <li>ASME BPVC VIII, B31.3, B16.5, B31J</li>
+                <li>Piping Stress & Vibration Analysis</li>
+                <li>Root-Cause & Failure Analysis</li>
+              </ul>
+            </>
+          ),
+        },
+    {
+      icon: Briefcase,
+      color: '#0079C1',
+      bg: 'var(--accent-light)',
+      title: 'Professional Experience',
+      body: (
+        <div style={{ fontSize: '0.8rem', lineHeight: '1.75' }}>
+          {isHidi
+            ? 'Mechanical EIT at The Hidi Group — delivering building mechanical design, HVAC load calculations, and Revit MEP BIM coordination, with prior integrity engineering & FEA experience at Zachry.'
+            : 'Engineering Specialist at Zachry Integrity Engineering Ltd. — delivering FEA analysis, FFS evaluations, and ASME-compliant piping calculations for major oil & gas refinery clients across Western Canada.'}
+        </div>
+      ),
+    },
   { icon: BookOpen, color: '#00A9E0', bg: 'var(--accent-2-light)', title: 'Education', body: (
     <>
       <div style={{marginBottom:'8px'}}>
@@ -92,11 +135,13 @@ const cards = [
           </span>
         </div>
       </div>
-    )
+    ),
   },
-];
+  ];
+};
 
 export default function About({ onNavigate }) {
+  const cards = getCards();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const statsRef = useRef(null);

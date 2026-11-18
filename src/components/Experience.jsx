@@ -3,14 +3,38 @@ import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { MapPin } from 'lucide-react';
+import { isHidiActive } from '../utils/careerConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const experiences = [
-  {
+const getExperiences = () => {
+  const isHidi = isHidiActive();
+  const baseList = [];
+
+  if (isHidi) {
+    baseList.push({
+      role: 'Mechanical EIT',
+      org: 'The Hidi Group',
+      initial: 'H',
+      period: 'Nov 2026 – Present',
+      location: 'Calgary, AB',
+      color: '#0284c7',
+      intro: 'The Hidi Group is an international building services engineering consultancy specializing in mechanical, electrical, plumbing, energy modeling, and smart building solutions for commercial, institutional, residential, and healthcare developments across North America. In my role, I support the design and coordination of building mechanical and HVAC systems.',
+      points: [
+        'Supporting mechanical design of HVAC, hydronic, plumbing, and building ventilation systems for commercial, institutional, and mixed-use developments.',
+        'Performing heating, cooling, and ventilation load calculations in accordance with ASHRAE standards (55, 62.1, 90.1) and the National Building / Energy Code of Canada (NBC / NECB).',
+        'Developing coordinated 3D BIM models, ductwork layouts, hydronic piping, and mechanical equipment schedules using Revit MEP and AutoCAD.',
+        'Participating in multidisciplinary BIM coordination to resolve spatial interferences between mechanical, structural, and electrical building systems.',
+        'Assisting senior engineers with equipment selections (AHUs, chillers, boilers, VAV boxes, pumps) and drafting code-compliant engineering deliverables.'
+      ],
+    });
+  }
+
+  baseList.push({
     role: 'Engineering Specialist',
     org: 'Zachry Integrity Engineering Ltd.',
-    period: 'May 2025 – Present',
+    initial: 'Z',
+    period: isHidi ? 'May 2025 – Nov 2026' : 'May 2025 – Present',
     location: 'Calgary, AB',
     color: '#0079C1',
     intro: 'Zachry Integrity Engineering provides specialized mechanical integrity and engineering assessment services for refinery and petrochemical assets across North America. In my role, I support engineering evaluations of pressure equipment and piping systems, helping clients make technically sound decisions related to equipment integrity, repair planning, and continued operation.',
@@ -21,55 +45,64 @@ const experiences = [
       'Reviewed client drawings, equipment records, inspection findings, and thermography data to prepare engineering calculations, technical reports, and mechanical integrity assessments.',
       'Collaborated with multidisciplinary engineering teams and client personnel to deliver technically sound recommendations supporting equipment reliability, repair planning, and continued operation.'
     ],
-  },
-  {
-    role: 'Propulsion System Design Intern',
-    org: 'Prime Toolings',
-    period: 'Sep 2024 – Jan 2025',
-    location: 'Remote',
-    color: '#ea580c',
-    intro: 'Prime Toolings specializes in the design and manufacturing of precision tooling and engineering solutions for aerospace and industrial applications. During my internship, I supported propulsion-system design activities involving CAD modelling, engineering analysis, and simulation-driven design improvements.',
-    points: [
-      'Designed and refined propulsion-system components and layouts using CAD tools, considering aerodynamic performance, structural requirements, and manufacturability.',
-      'Conducted CFD simulations to evaluate airflow behaviour and compare design iterations, supporting engineering decisions throughout the development process.',
-      'Supported turbine blade and propulsion component development by evaluating geometry, material selection, and structural performance.',
-      'Prepared engineering models, technical documentation, and simulation results to support design reviews and project discussions.',
-      'Collaborated with engineers throughout the design process to deliver assigned project work within established timelines.'
-    ],
-  },
-  {
-    role: 'Assistant Manager',
-    org: 'Circle K',
-    period: 'Feb 2023 – Present',
-    location: 'Calgary, AB',
-    color: '#dc2626',
-    intro: 'Circle K is one of North America\'s largest convenience retail chains, serving millions of customers through a network of company-owned and franchised stores. As an Assistant Manager, I supported daily store operations while leading a team in a fast-paced customer-focused environment.',
-    points: [
-      'Supervised day-to-day store operations, ensuring high standards of customer service, inventory management, cash handling, and operational efficiency.',
-      'Led, trained, and supported a team of employees by coordinating work schedules, delegating responsibilities, and maintaining a collaborative work environment.',
-      'Developed an Excel VBA-based inventory tracking system that improved inventory visibility and contributed to a reduction in stock shortages.',
-      'Helped improve operational performance by supporting initiatives that contributed to increased sales, enhanced workplace safety, and more efficient inventory management.',
-      'Strengthened leadership, communication, problem-solving, and decision-making skills while balancing operational priorities in a high-volume retail environment.'
-    ],
-  },
-  {
-    role: 'Aerospace Vehicle Design Project Trainee',
-    org: 'Brahmastra Aerospace',
-    period: 'Nov 2022 – Jan 2023',
-    location: 'Bengaluru, India (Remote)',
-    color: '#4f46e5',
-    intro: 'Brahmastra Aerospace provided project-based exposure to aerospace vehicle design, CAD modelling, and computational fluid dynamics. During this training experience, I worked on aircraft and propulsion-related design concepts using CATIA V5 and CFD tools.',
-    points: [
-      'Designed an aircraft wing with internal support structures using CATIA V5, considering aerodynamic geometry and structural arrangement.',
-      'Performed CFD analyses at multiple angles of attack to study airflow behaviour and evaluate aerodynamic performance.',
-      'Developed a simplified rocket model and conducted simulations to examine stability, airflow, and thrust-related characteristics.',
-      'Modelled a jet-engine turbine blade using CAD techniques, considering aerodynamic form and component geometry.',
-      'Documented design assumptions, simulation observations, and project findings as part of the technical training activities.'
-    ],
-  },
-];
+  });
+
+  baseList.push(
+    {
+      role: 'Propulsion System Design Intern',
+      org: 'Prime Toolings',
+      initial: 'P',
+      period: 'Sep 2024 – Jan 2025',
+      location: 'Remote',
+      color: '#ea580c',
+      intro: 'Prime Toolings specializes in the design and manufacturing of precision tooling and engineering solutions for aerospace and industrial applications. During my internship, I supported propulsion-system design activities involving CAD modelling, engineering analysis, and simulation-driven design improvements.',
+      points: [
+        'Designed and refined propulsion-system components and layouts using CAD tools, considering aerodynamic performance, structural requirements, and manufacturability.',
+        'Conducted CFD simulations to evaluate airflow behaviour and compare design iterations, supporting engineering decisions throughout the development process.',
+        'Supported turbine blade and propulsion component development by evaluating geometry, material selection, and structural performance.',
+        'Prepared engineering models, technical documentation, and simulation results to support design reviews and project discussions.',
+        'Collaborated with engineers throughout the design process to deliver assigned project work within established timelines.'
+      ],
+    },
+    {
+      role: 'Assistant Manager',
+      org: 'Circle K',
+      initial: 'C',
+      period: 'Feb 2023 – Present',
+      location: 'Calgary, AB',
+      color: '#dc2626',
+      intro: 'Circle K is one of North America\'s largest convenience retail chains, serving millions of customers through a network of company-owned and franchised stores. As an Assistant Manager, I supported daily store operations while leading a team in a fast-paced customer-focused environment.',
+      points: [
+        'Supervised day-to-day store operations, ensuring high standards of customer service, inventory management, cash handling, and operational efficiency.',
+        'Led, trained, and supported a team of employees by coordinating work schedules, delegating responsibilities, and maintaining a collaborative work environment.',
+        'Developed an Excel VBA-based inventory tracking system that improved inventory visibility and contributed to a reduction in stock shortages.',
+        'Helped improve operational performance by supporting initiatives that contributed to increased sales, enhanced workplace safety, and more efficient inventory management.',
+        'Strengthened leadership, communication, problem-solving, and decision-making skills while balancing operational priorities in a high-volume retail environment.'
+      ],
+    },
+    {
+      role: 'Aerospace Vehicle Design Project Trainee',
+      org: 'Brahmastra Aerospace',
+      initial: 'B',
+      period: 'Nov 2022 – Jan 2023',
+      location: 'Bengaluru, India (Remote)',
+      color: '#4f46e5',
+      intro: 'Brahmastra Aerospace provided project-based exposure to aerospace vehicle design, CAD modelling, and computational fluid dynamics. During this training experience, I worked on aircraft and propulsion-related design concepts using CATIA V5 and CFD tools.',
+      points: [
+        'Designed an aircraft wing with internal support structures using CATIA V5, considering aerodynamic geometry and structural arrangement.',
+        'Performed CFD analyses at multiple angles of attack to study airflow behaviour and evaluate aerodynamic performance.',
+        'Developed a simplified rocket model and conducted simulations to examine stability, airflow, and thrust-related characteristics.',
+        'Modelled a jet-engine turbine blade using CAD techniques, considering aerodynamic form and component geometry.',
+        'Documented design assumptions, simulation observations, and project findings as part of the technical training activities.'
+      ],
+    }
+  );
+
+  return baseList;
+};
 
 export default function Experience() {
+  const experiences = getExperiences();
   const sectionRef = useRef(null);
   const itemRefs = useRef([]);
 
@@ -125,7 +158,7 @@ export default function Experience() {
                             border: '1px solid rgba(255,255,255,0.15)'
                           }}
                         >
-                          {exp.org.charAt(0)}
+                          {exp.initial || exp.org.charAt(0)}
                         </div>
 
                         <div className="min-w-0 flex-1">

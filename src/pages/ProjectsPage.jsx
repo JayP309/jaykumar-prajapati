@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { isHidiActive } from "../utils/careerConfig";
 
 // ─── FONT & UTILS ─────────────────────────────────────────────────────────────
 const fontStyle = `
@@ -852,13 +853,27 @@ const ProjectCard = ({ project, index, initialProjectNum }) => {
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 export default function ProjectsPage({ onBack, initialProjectNum }) {
+  const isHidi = isHidiActive();
   const [selectedTab, setSelectedTab] = useState("All");
 
-  const categories = ["All", "Professional Projects", "Academic Projects", "Personal Projects"];
+  const getOrderedProjects = () => {
+    if (!isHidi) return projects;
+    const hvac = projects.filter(p => p.number === "08" || p.tools?.some(t => t.includes("HVAC") || t.includes("Revit")));
+    const rest = projects.filter(p => p.number !== "08" && !p.tools?.some(t => t.includes("HVAC") || t.includes("Revit")));
+    return [...hvac, ...rest];
+  };
+
+  const orderedProjects = getOrderedProjects();
+
+  const categories = isHidi
+    ? ["All", "Building Services & HVAC", "Professional Projects", "Academic Projects", "Personal Projects"]
+    : ["All", "Professional Projects", "Academic Projects", "Personal Projects"];
 
   const filteredProjects = selectedTab === "All" 
-    ? projects 
-    : projects.filter(p => p.category === selectedTab);
+    ? orderedProjects 
+    : selectedTab === "Building Services & HVAC"
+      ? orderedProjects.filter(p => p.category === "Building Services & HVAC" || p.tools?.some(t => t.includes("HVAC") || t.includes("Revit") || t.includes("ASHRAE")))
+      : orderedProjects.filter(p => p.category === selectedTab);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -911,7 +926,9 @@ export default function ProjectsPage({ onBack, initialProjectNum }) {
             Mechanical Design & <span className="text-sky-600">Integrity Analysis</span>
           </h1>
           <p className="max-w-xl mx-auto text-slate-500 text-sm sm:text-base leading-relaxed mb-10">
-            A comprehensive gallery of professional integrity assessments, aerospace fluid simulations, HVAC designs, and detailed structural finite element models.
+            {isHidi 
+              ? "A comprehensive gallery of building mechanical & HVAC designs, professional integrity assessments, aerospace fluid simulations, and finite element models."
+              : "A comprehensive gallery of professional integrity assessments, aerospace fluid simulations, HVAC designs, and detailed structural finite element models."}
           </p>
 
           {/* ── CATEGORY FILTER TABS ── */}

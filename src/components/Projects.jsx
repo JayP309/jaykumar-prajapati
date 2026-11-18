@@ -3,6 +3,7 @@ import { motion, useMotionValue, useAnimationFrame, useTransform } from 'framer-
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight } from 'lucide-react';
+import { isHidiActive } from '../utils/careerConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,80 +63,89 @@ const ThumbShock = () => (
   </svg>
 );
 
-const PROJECTS = [
-  {
-    number: '06',
-    title: 'Aerodynamic Analysis of 3D Wing',
-    category: 'Academic',
-    desc: 'Fluent 3D CFD modeling of wing flow streamlines and tip vortices validation.',
-    color: '#2563eb',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/Picture1.png',
-    isVideo: false
-  },
-  {
-    number: '07',
-    title: 'CFD Simulation of NACA 4412 Airfoil',
-    category: 'Academic',
-    desc: 'Airfoil drag polar optimization and mesh independence analysis under Fluent.',
-    color: '#0d9488',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/media__1781900717132.jpg',
-    isVideo: false
-  },
-  {
-    number: '08',
-    title: 'Energy-Efficient Commercial HVAC Design',
-    category: 'Personal',
-    desc: 'Building thermal loads, VAV system layout and BIM modeling in Revit MEP.',
-    color: '#2563eb',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/media__1781900895658.jpg',
-    isVideo: false
-  },
-  {
-    number: '10',
-    title: 'Random Vibration Shock Analysis',
-    category: 'Personal',
-    desc: 'ANSYS solid-element FEA shock absorber modeling under PSD random vibration frequency loads.',
-    color: '#4f46e5',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/shock_new_1.png',
-    isVideo: false
-  },
-  {
-    number: '11',
-    title: '3D CAD Model of 4-Cylinder Engine',
-    category: 'Personal',
-    desc: 'Designed a fully constrained, high-fidelity 4-cylinder combustion engine assembly in SolidWorks.',
-    color: '#4f46e5',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/Assembly_Animation.mp4',
-    isVideo: true
-  },
-  {
-    number: '12',
-    title: '3D CAD Model of Engine Blower',
-    category: 'Personal',
-    desc: 'Developed a 3D parametric engine blower housing and impeller blade assembly using CREO Parametric.',
-    color: '#0891b2',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/Engine_Blower.mp4',
-    isVideo: true
-  },
-  {
-    number: '13',
-    title: '3D CAD Model of Bench Vise Assembly',
-    category: 'Personal',
-    desc: 'Designed a precision mechanical bench vise clamping assembly inside AutoCAD.',
-    color: '#475569',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/Screenshot 2025-02-07 120959.png',
-    isVideo: false
-  },
-  {
-    number: '16',
-    title: 'Gantry Crane Structural FEA',
-    category: 'Personal',
-    desc: 'Bending stress and deflection assessment of a gantry crane structure in SolidWorks under vertical loads.',
-    color: '#0284c7',
-    thumbUrl: import.meta.env.BASE_URL + 'assets/media__1783618616876.png',
-    isVideo: false
+const getProjectsList = () => {
+  const isHidi = isHidiActive();
+  const list = [
+    {
+      number: '08',
+      title: 'Energy-Efficient Commercial HVAC Design',
+      category: isHidi ? 'Building Services · Revit MEP' : 'Personal',
+      desc: 'Building thermal loads, VAV system layout and BIM modeling in Revit MEP.',
+      color: '#0079C1',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/media__1781900895658.jpg',
+      isVideo: false
+    },
+    {
+      number: '06',
+      title: 'Aerodynamic Analysis of 3D Wing',
+      category: 'Academic',
+      desc: 'Fluent 3D CFD modeling of wing flow streamlines and tip vortices validation.',
+      color: '#2563eb',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/Picture1.png',
+      isVideo: false
+    },
+    {
+      number: '07',
+      title: 'CFD Simulation of NACA 4412 Airfoil',
+      category: 'Academic',
+      desc: 'Airfoil drag polar optimization and mesh independence analysis under Fluent.',
+      color: '#0d9488',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/media__1781900717132.jpg',
+      isVideo: false
+    },
+    {
+      number: '10',
+      title: 'Random Vibration Shock Analysis',
+      category: 'Personal',
+      desc: 'ANSYS solid-element FEA shock absorber modeling under PSD random vibration frequency loads.',
+      color: '#4f46e5',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/shock_new_1.png',
+      isVideo: false
+    },
+    {
+      number: '11',
+      title: '3D CAD Model of 4-Cylinder Engine',
+      category: 'Personal',
+      desc: 'Designed a fully constrained, high-fidelity 4-cylinder combustion engine assembly in SolidWorks.',
+      color: '#4f46e5',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/Assembly_Animation.mp4',
+      isVideo: true
+    },
+    {
+      number: '12',
+      title: '3D CAD Model of Engine Blower',
+      category: 'Personal',
+      desc: 'Developed a 3D parametric engine blower housing and impeller blade assembly using CREO Parametric.',
+      color: '#0891b2',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/Engine_Blower.mp4',
+      isVideo: true
+    },
+    {
+      number: '13',
+      title: '3D CAD Model of Bench Vise Assembly',
+      category: 'Personal',
+      desc: 'Designed a precision mechanical bench vise clamping assembly inside AutoCAD.',
+      color: '#475569',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/Screenshot 2025-02-07 120959.png',
+      isVideo: false
+    },
+    {
+      number: '16',
+      title: 'Gantry Crane Structural FEA',
+      category: 'Personal',
+      desc: 'Bending stress and deflection assessment of a gantry crane structure in SolidWorks under vertical loads.',
+      color: '#0284c7',
+      thumbUrl: import.meta.env.BASE_URL + 'assets/media__1783618616876.png',
+      isVideo: false
+    }
+  ];
+
+  if (!isHidi) {
+    const hvac = list.shift();
+    list.splice(2, 0, hvac);
   }
-];
+  return list;
+};
 
 const borderCSS = `
 @keyframes border-spin {
@@ -166,8 +176,9 @@ const borderCSS = `
 }
 `;
 
-function ProjectCarouselCard({ p, index, onNavigate, hoverRef, rotationY }) {
-  const angle = index * (360 / PROJECTS.length);
+function ProjectCarouselCard({ p, index, totalCount, onNavigate, hoverRef, rotationY }) {
+  const count = totalCount || 8;
+  const angle = index * (360 / count);
   const counterRotation = useTransform(rotationY, (r) => -(r + angle));
 
   return (
@@ -257,6 +268,8 @@ function ProjectCarouselCard({ p, index, onNavigate, hoverRef, rotationY }) {
 }
 
 export default function Projects({ onNavigate }) {
+  const isHidi = isHidiActive();
+  const PROJECTS = getProjectsList();
   const sectionRef = useRef(null);
   const hoverRef = useRef(false);
   const rotationY = useMotionValue(0);
@@ -331,7 +344,9 @@ export default function Projects({ onNavigate }) {
             Featured Work
           </h2>
           <p className="mt-3 text-sm sm:text-base md:text-lg max-w-xl mx-auto" style={{ color: 'var(--text-3)' }}>
-            Explore specialized engineering projects categorized across industrial, academic, and personal milestones.
+            {isHidi 
+              ? 'Explore specialized engineering projects featuring commercial HVAC design, building mechanical systems, and finite element models.'
+              : 'Explore specialized engineering projects categorized across industrial, academic, and personal milestones.'}
           </p>
         </div>
 
@@ -349,7 +364,7 @@ export default function Projects({ onNavigate }) {
             style={{ rotateY: rotationY, transformStyle: 'preserve-3d' }}
           >
             {PROJECTS.map((p, i) => (
-              <ProjectCarouselCard key={p.title} p={p} index={i} onNavigate={onNavigate} hoverRef={hoverRef} rotationY={rotationY} />
+              <ProjectCarouselCard key={p.title} p={p} index={i} totalCount={PROJECTS.length} onNavigate={onNavigate} hoverRef={hoverRef} rotationY={rotationY} />
             ))}
           </motion.div>
         </div>

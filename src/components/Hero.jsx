@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { gsap } from 'gsap';
 import { Github, Linkedin, Download, Mail, MapPin, ArrowDown, Eye } from 'lucide-react';
+import { isHidiActive } from '../utils/careerConfig';
 const BASE = import.meta.env.BASE_URL;
 const jayImg = `${BASE}assets/jay.jpg`;
 
@@ -29,6 +30,7 @@ const wordVariants = {
 };
 
 export default function Hero({ onNavigate }) {
+  const isHidi = isHidiActive();
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 500], [0, 100]);
   const heroOpacity = useTransform(scrollY, [0, 350], [1, 0]);
@@ -59,7 +61,9 @@ export default function Hero({ onNavigate }) {
             transition={{ duration: 0.5, delay: 0.15 }}
           >
             <span className="eyebrow text-[0.6rem] sm:text-[0.6875rem]">
-              Mechanical Engineer in Training · EIT – APEGA
+              {isHidi 
+                ? 'Mechanical Engineer in Training · Mechanical EIT at The Hidi Group'
+                : 'Mechanical Engineer in Training · EIT – APEGA'}
             </span>
           </motion.div>
 
@@ -107,8 +111,9 @@ export default function Hero({ onNavigate }) {
             className="text-sm sm:text-base md:text-lg leading-7 max-w-md"
             style={{ color: "var(--text-2)" }}
           >
-            FEA-based mechanical analysis, mechanical integrity assessment,
-            and piping stress engineering for oil & gas clients across Western Canada.
+            {isHidi 
+              ? 'Specializing in building mechanical systems, HVAC design, and thermal load modeling in Revit MEP, alongside structural FEA and mechanical integrity engineering.'
+              : 'FEA-based mechanical analysis, mechanical integrity assessment, and piping stress engineering for oil & gas clients across Western Canada.'}
           </motion.p>
 
           {/* Location */}
@@ -120,7 +125,7 @@ export default function Hero({ onNavigate }) {
             style={{ color: "var(--text-3)" }}
           >
             <MapPin size={13} />
-            <span>Calgary, AB · Open to Relocate</span>
+            <span>{isHidi ? 'Calgary, AB' : 'Calgary, AB · Open to Relocate'}</span>
           </motion.div>
 
           {/* Actions */}

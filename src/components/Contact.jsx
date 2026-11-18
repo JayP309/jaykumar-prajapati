@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, Linkedin, Github, Send, Phone, CheckCircle, AlertCircle, Loader } from 'lucide-react';
+import { isHidiActive } from '../utils/careerConfig';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,6 +35,7 @@ const contacts = [
 ];
 
 export default function Contact() {
+  const isHidi = isHidiActive();
   const sectionRef = useRef(null);
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -150,7 +152,11 @@ export default function Contact() {
                 </span>
               </span>
               <p className="text-xs sm:text-sm" style={{ color: 'var(--accent)' }}>
-                Currently <strong>available</strong> for full-time Engineering roles — Mechanical Integrity, Piping Stress, FEA, and Pressure Equipment Design.
+                {isHidi ? (
+                  <>Currently working as <strong>Mechanical EIT at The Hidi Group</strong> — open to connecting on building mechanical systems, HVAC design, and engineering innovations.</>
+                ) : (
+                  <>Currently <strong>available</strong> for full-time Engineering roles — Mechanical Integrity, Piping Stress, FEA, and Pressure Equipment Design.</>
+                )}
               </p>
             </div>
           </div>
